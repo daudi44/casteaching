@@ -26,7 +26,7 @@
                                                 Data de publicació
                                             </dt>
                                             <dd class="order-1 text-2xl font-extrabold text-red-400">
-                                                {{ $video->published_at }}
+                                                {{ $video->formated_published_at }}
                                             </dd>
                                         </div>
                                     </dl>
