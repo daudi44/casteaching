@@ -20,6 +20,11 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public static function testedBy()
+    {
+        return UserTest::class;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,4 +63,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function isSuperAdmin()
+    {
+        return boolval($this->super_admin);
+    }
 }

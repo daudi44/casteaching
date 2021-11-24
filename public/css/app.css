@@ -1876,6 +1876,12 @@ select {
 .pb-5 {
 	padding-bottom: 1.25rem;
 }
+.pr-6 {
+	padding-right: 1.5rem;
+}
+.pr-3 {
+	padding-right: 0.75rem;
+}
 .text-left {
 	text-align: left;
 }

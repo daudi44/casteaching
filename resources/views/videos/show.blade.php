@@ -37,7 +37,7 @@
 
             </div>
             <div class="prose-sm md:prose lg:prose-xl 2xl:prose-2xl mt-4">
-                {!!   Str::markdown($video->description) !!}
+                {!! Str::markdown($video->description) !!}
             </div>
         </div>
     </div>
