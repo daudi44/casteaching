@@ -6,6 +6,7 @@ use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 if(! function_exists('create_default_user')){
     function create_default_user(){
@@ -66,6 +67,36 @@ if(! function_exists('create_default_videos')){
     }
 }
 
+if(! function_exists('create_regular_user')){
+    function create_regular_user()
+    {
+        $user = User::create([
+            'name' => 'RegularUser',
+            'email' => 'regular@casteaching.com',
+            'password' => Hash::make('12345')
+        ]);
+
+        add_personal_team($user);
+
+        return $user;
+    }
+}
+
+if(! function_exists('create_video_manager_user')) {
+    function create_video_manager_user()
+    {
+        $user = User::create([
+            'name' => 'VideosManager',
+            'email' => 'videosmanager@casteaching.com',
+            'password' => Hash::make('12345')
+        ]);
+        Permission::create(['name' => 'videos_manage_index']);
+        $user -> givePermissionTo('videos_manage_index');
+        add_personal_team($user);
+        return $user;
+    }
+}
+
 if(! function_exists('create_superadmin_user')){
     function create_superadmin_user()
     {
@@ -95,11 +126,12 @@ if(! function_exists('define_gates')) {
         Gate::define('videos_manage_index', function (User $user) {
             return false;
         });
+    }
+}
 
-
-
-//        Gate::define('videos_manage_create', function (User $user) {
-//            return false;
-//        });
+if(! function_exists('create_permissions')) {
+    function create_permissions()
+    {
+        Permission::firstOrCreate(['name' => 'videos_manage_index']);
     }
 }
