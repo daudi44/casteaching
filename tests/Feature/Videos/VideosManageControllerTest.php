@@ -26,7 +26,7 @@ class VideosManageControllerTest extends TestCase
         $response = $this->get('/manage/videos');
 
         //3-Provar
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
     /**
@@ -42,6 +42,16 @@ class VideosManageControllerTest extends TestCase
 
         //3-Provar
         $response->assertStatus(200);
+        $response->assertViewIs('videos.manage.index');
+    }
+
+    /**
+     * @test
+     */
+    public function guest_users_cannot_manage_videos(){
+        $response = $this->get('/manage/videos');
+
+        $response -> assertStatus(200);
     }
 
     private function loginAsVideoManager()
@@ -53,15 +63,11 @@ class VideosManageControllerTest extends TestCase
         ]);
 
         Auth::login($user);
+
     }
 
     private function loginAsSuperAdmin()
     {
-        Auth::login(User::create([
-            'name' => 'SuperAdmin',
-            'email' => 'superadmin@casteaching.com',
-            'password' => Hash::make('12345'),
-            'super_admin' => true
-        ]));
+        Auth::login(create_superadmin_user());
     }
 }

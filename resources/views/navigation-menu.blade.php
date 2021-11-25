@@ -20,6 +20,11 @@
                         {{ __('Videos 1') }}
                     </x-jet-nav-link>
 
+
+                    <x-jet-nav-link href="/manage/videos" :active="request()->routeIs('manage.videos')">
+                        {{ __('Gestió de Vídeos') }}
+                    </x-jet-nav-link>
+
                 </div>
             </div>
             @if(Auth::check())
@@ -159,6 +164,9 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="/videos/1">
                 {{ __('Videos 1') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="/manage/videos" :active="request()->routeIs('manage.videos')">
+                {{ __('Gestió de Vídeos') }}
             </x-jet-responsive-nav-link>
         </div>
 

@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         create_default_user();
         create_student_user();
 
+        create_superadmin_user();
+
         create_default_videos();
     }
 }

@@ -66,6 +66,6 @@ class User extends Authenticatable
 
     public function isSuperAdmin()
     {
-        return boolval($this->super_admin);
+        return boolval($this->superadmin);
     }
 }
