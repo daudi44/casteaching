@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class VideosManageController extends Controller
 {
+    public static function testedBy()
+    {
+        return VideosManageController::class;
+    }
+
     //CRUD
     /**
      * R -> Retrieve -> Llista
      */
     public function index()
     {
-        return view('videos.manage.index');
+        return view('videos.manage.index',[
+            'videos' => Video::all()
+        ]);
     }
 
     /**

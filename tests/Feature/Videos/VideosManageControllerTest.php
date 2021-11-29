@@ -3,31 +3,43 @@
 namespace Tests\Feature\Videos;
 
 use App\Models\User;
+use App\Models\Video;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
+/**
+ * @covers  \App\Http\Controllers\VideosManageController
+ */
 class VideosManageControllerTest extends TestCase
 {
     use RefreshDatabase;
-
-    //Happy path
 
     /**
      * @test
      */
     public function user_with_permissions_can_manage_videos()
     {
-        //1-Preparar
         $this->loginAsVideoManager();
 
-        //2-Executar
+        $videos = create_sample_videos();
+
         $response = $this->get('/manage/videos');
 
-        //3-Provar
         $response->assertStatus(200);
+        $response->assertViewIs('videos.manage.index');
+        $response->assertViewHas('videos',function($v) use ($videos){
+            return $videos->count() === $videos->count() && get_class($videos) === Collection::class &&
+                get_class($videos[0]) === Video::class;
+        });
+
+        foreach ($videos as $video) {
+            $response->assertSee($video->id);
+            $response->assertSee($video->title);
+        }
     }
 
     /**
@@ -35,13 +47,10 @@ class VideosManageControllerTest extends TestCase
      */
     public function superadmins_can_manage_videos()
     {
-        //1-Preparar
         $this->loginAsSuperAdmin();
 
-        //2-Executar
         $response = $this->get('/manage/videos');
 
-        //3-Provar
         $response->assertStatus(200);
         $response->assertViewIs('videos.manage.index');
     }

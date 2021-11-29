@@ -47,8 +47,8 @@ if (! function_exists('add_personal_team')) {
                 'user_id' => $user->id,
                 'personal_team' => true
             ]);
-        } catch (\Exception $exception) {
-//            dd($exception->getMessage());
+        }catch(\Exception $exception){
+            dd($exception->getMessage());
         }
     }
 }
@@ -133,5 +133,31 @@ if(! function_exists('create_permissions')) {
     function create_permissions()
     {
         Permission::firstOrCreate(['name' => 'videos_manage_index']);
+    }
+}
+
+if(! function_exists('create_sample_videos')) {
+     function create_sample_videos(){
+         $video1 = Video::create([
+             'title' => 'playlist para estudar como sócrates após descobrir que é o mais sábio pelo oráculo de delfos',
+             'description' => '**Se quer mais conteúdo como esse, dê uma CURTIDA nesse vídeo e clique em INSCREVER-SE! Fiz essa playlist para quem quer estudar como Sócrates após descobrir que é o mais sábio pelo Oráculo de Delfos.** Sócrates foi um filósofo com muitos discípulos ricos. Não cobrava um centavo deles — afinal, não era um sofista aproveitador sem escrúpulos barganhista do conhecimento. Entretanto, vivia dormindo, comendo e bebendo na mansão de seus discípulos, e de vez em sempre levava uma quentinha para casa com o que sobrava das festas. Como sabemos, Sócrates não escreveu nenhum livro. Ele inventava as desculpas mais esfarrapadas do mundo para não escrever, como a de que escrever atrapalha a memória (???). Entretanto, teve a sorte de ter um discípulo, Platão, que escreveu detalhadamente vários diálogos inteiros que Sócrates travou com os influencers da época. Evidentemente, Platão não estava presente em todos os diálogos, então perguntava a alguém que estava lá o que foi dialogado e, a partir disso, escrevia os diálogos. Ou seja, os diálogos de Platão possuem a precisão histórica de uma vizinha fofoqueira. Com exceção de Foucault, todos sabemos que os gregos eram gays. Sócrates, entretanto, provavelmente não era, já que negava fogo a Alcibíades, um dos jovens mais cobiçados da Grécia, que só faltava morrer de amores pelo seu daddy. Um dia Alcibíades chegou bebado em uma reunião de filósofos e declarou-se abusivamente para Sócrates na frente de todos, sendo portanto o primeiro gay a ser cancelado pelo LDRV. Sócrates explicou que, enquanto Alcibíades era bonito, ele mesmo era sábio, que "a beleza do corpo não supera a beleza da alma". Como vemos, Sócrates era muito humilde. Por isso, vivia dizendo que o próprio deus Apolo o intitulou como o homem mais sábio do planeta Terra. Uma das frases mais famosas de Sócrates é: "todo mundo é burro menos eu". Além disso, Sócrates se levava extremamente a sério, sendo a primeira pessoa a crinjar toda a Grécia. Isso fez muitos comediantes da época criarem peças para caçoarem de Sócrates. Provavelmente, a pessoa que mais fez piada com Sócrates foi o comediante Aristófanes. Em sua peça "As Nuvens", Aristófanes descreveu Sócrates como um filósofo muito sério, que seus discípulos tocavam trombetas sempre que ele chegava em algum lugar e que ele falava como o Leandro Karnal. Apesar disso, Aristófanes escreveu que uma das maiores descobertas de Sócrates foi a de que o mosquito zumbia pela bunda — ou seja, além de filósofo, era biólogo. Para Sócrates, o que as pessoas comuns dizem é apenas parcialmente verdadeiro, assim como essa pequena biografia.
+',
+             'url' => 'https://youtu.be/AxLlcmWBKR8'
+         ]);
+
+         $video2 = Video::create([
+             'title' => 'playlist para estudar como um filósofo do século XVII',
+             'description' => '**Se quer mais conteúdo como esse, dê uma CURTIDA nesse vídeo e clique em INSCREVER-SE!** Playlist para estudar como um fiósofo do século XVII.
+',
+             'url' => 'https://youtu.be/_KGNtPp67Z4'
+         ]);
+
+         $video3 = Video::create([
+             'title' => 'playlist para estudar como nietzsche sobre o abismo em uma corda bamba entre o animal e o übermensch',
+             'description' => '**Cada curtida é um passo para o übermensch.** Capa: Frame do filme "Dias de Nietzsche em Turim"',
+             'url' => 'https://youtu.be/80084Zqs-Fo'
+         ]);
+
+         return collect([$video1, $video2, $video3]);
     }
 }
