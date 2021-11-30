@@ -21,6 +21,36 @@ class VideosManageControllerTest extends TestCase
     /**
      * @test
      */
+    public function user_with_permissions_can_store_videos(){
+        $this->loginAsVideoManager();
+
+        $video = objectify([
+            'title' => 'Prova',
+            'description' => 'bla bla',
+            'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+        ]);
+
+        $response = $this->post('/manage/videos',[
+            'title' => 'Prova',
+            'description' => 'bla bla',
+            'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+        ]);
+
+        $response->assertRedirect(route('manage.videos'));
+        $response->assertSessionHas('success', 'Successfully added');
+
+        $videoDB = Video::first();
+
+        $this->assertNotNull($videoDB);
+        $this->assertEquals($videoDB->title,$video->title);
+        $this->assertEquals($videoDB->description,$video->description);
+        $this->assertEquals($videoDB->url,$video->url);
+        $this->assertNull($video->published_at);
+    }
+
+    /**
+     * @test
+     */
     public function user_with_permissions_can_see_add_videos(){
         $this->loginAsVideoManager();
 

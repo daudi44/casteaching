@@ -36,7 +36,17 @@ class VideosManageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Video::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'url' => $request->url
+        ]);
+
+        session()->flash('success', 'Successfully added');
+
+        return redirect()->route('manage.videos');
+
+//        return response()->view('videos.manage.index', ['videos'=>[]], 201);
     }
 
     /**
