@@ -97,6 +97,23 @@ if(! function_exists('create_video_manager_user')) {
     }
 }
 
+//Part del exercici de crear l'apartat d'usuaris d'igual manera que el de videos, per tant aqui baix creo un helper
+//que ens ajuda a crear un usuari al que dono els permisos de poder accedir a la modificació dels usuaris totals
+if(! function_exists('create_user_manager_user')) {
+    function create_user_manager_user()
+    {
+        $user = User::create([
+            'name' => 'UsersManager',
+            'email' => 'usersmanager@casteaching.com',
+            'password' => Hash::make('dani12345dani')
+        ]);
+        Permission::create(['name' => 'users_manage_index']);
+        $user -> givePermissionTo('users_manage_index');
+        add_personal_team($user);
+        return $user;
+    }
+}
+
 if(! function_exists('create_superadmin_user')){
     function create_superadmin_user()
     {
@@ -159,5 +176,30 @@ if(! function_exists('create_sample_videos')) {
          ]);
 
          return collect([$video1, $video2, $video3]);
+    }
+}
+
+if(! function_exists('create_sample_users')) {
+    function create_sample_users()
+    {
+        $user1 = User::create([
+            'name' => 'Pakistani Danny',
+            'email' => 'pakistanidanny@casteaching.com',
+            'password' => 'contrasenyaanticopiadeltreball'
+        ]);
+
+        $user2 = User::create([
+            'name' => 'Pedro',
+            'email' => 'pedro@casteaching.com',
+            'password' => 'contrasenyaanticopiadeltreball'
+        ]);
+
+        $user3 = User::create([
+            'name' => 'Munia',
+            'email' => 'munia@casteaching.com',
+            'password' => 'contrasenyaanticopiadeltreball'
+        ]);
+
+        return collect([$user1, $user2, $user3]);
     }
 }

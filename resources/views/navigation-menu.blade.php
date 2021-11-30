@@ -26,6 +26,13 @@
                     </x-jet-nav-link>
                         @endcan
 
+
+                    @can('users_manage_index')
+                        <x-jet-nav-link href="/manage/users" :active="request()->routeIs('manage.users')">
+                            {{ __('Gestió de usuaris') }}
+                        </x-jet-nav-link>
+                    @endcan
+
                 </div>
             </div>
             @if(Auth::check())
@@ -171,6 +178,11 @@
                 {{ __('Gestió de Vídeos') }}
             </x-jet-responsive-nav-link>
                 @endcan
+            @can('videos_manage_index')
+                <x-jet-responsive-nav-link href="/manage/users" :active="request()->routeIs('manage.videos')">
+                    {{ __('Gestió de usuaris') }}
+                </x-jet-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
