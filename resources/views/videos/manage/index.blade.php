@@ -1,7 +1,22 @@
 <x-casteaching-layout>
-
-    <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex flex-col">
+
+        @can('videos_manage_create')
+        <form data-qa="form_video_add" action="" method="POST">
+            <label for="">Title</label>
+            <input type="text" name="title" id="title">
+
+
+            <label for="">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+
+            <label for="">Url</label>
+            <input type="text" name="url" id="url">
+
+            <button>Add</button>
+        </form>
+        @endcan
+
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
