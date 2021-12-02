@@ -114,7 +114,11 @@ if(! function_exists('create_user_manager_user')) {
             'password' => Hash::make('dani12345dani')
         ]);
         Permission::create(['name' => 'users_manage_index']);
+        Permission::create(['name' => 'users_manage_create']);
+        Permission::create(['name' => 'users_manage_destroy']);
         $user -> givePermissionTo('users_manage_index');
+        $user -> givePermissionTo('users_manage_create');
+        $user -> givePermissionTo('users_manage_destroy');
         add_personal_team($user);
         return $user;
     }
@@ -159,6 +163,8 @@ if(! function_exists('create_permissions')) {
         Permission::firstOrCreate(['name' => 'videos_manage_create']);
         Permission::firstOrcreate(['name' => 'videos_manage_destroy']);
         Permission::firstOrcreate(['name' => 'videos_manage_store']);
+        Permission::firstOrcreate(['name' => 'users_manage_create']);
+        Permission::firstOrcreate(['name' => 'users_manage_destroy']);
     }
 }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarisManageController extends Controller
 {
@@ -18,12 +19,17 @@ class UsuarisManageController extends Controller
         ]);
     }
 
-    public function create()
-    {
-    }
-
     public function store(Request $request)
     {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        session()->flash('success', 'Successfully added');
+
+        return redirect()->route('manage.users');
     }
 
     public function show($id)
@@ -40,5 +46,10 @@ class UsuarisManageController extends Controller
 
     public function destroy($id)
     {
+        User::find($id)->delete();
+
+        session()->flash('status', 'Successfully deleted');
+
+        return redirect()->route('manage.users');
     }
 }

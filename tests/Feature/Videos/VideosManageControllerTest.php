@@ -103,6 +103,56 @@ class VideosManageControllerTest extends TestCase
     /**
      * @test
      */
+    public function user_with_permissions_can_destroy_users(){
+        $this->loginAsUserManager();
+
+        $user = User::create([
+            'name' => 'Sujeto De Pruebas',
+            'email' => 'sujetodepruebas@casteaching.com',
+            'password' => Hash::make(12345)
+        ]);
+
+        $response = $this->delete('/manage/users/' . $user->id);
+
+        $response->assertRedirect(route('manage.users'));
+        $this->assertNull(Video::find($user->id));
+        $this->assertNull($user->refresh);
+        $response->assertSessionHas('status', 'Successfully deleted');
+    }
+
+    /**
+     * @test
+     */
+    public function user_with_permissions_can_store_users(){
+        $this->loginAsUserManager();
+
+        $user = objectify([
+            'name' => 'Sujeto De Pruebas',
+            'email' => 'sujetodepruebas@casteaching.com',
+            'password' => Hash::make(12345)
+        ]);
+
+        $response = $this->post('/manage/users',[
+            'name' => 'Sujeto De Pruebas',
+            'email' => 'sujetodepruebas@casteaching.com',
+            'password' => Hash::make(12345)
+        ]);
+
+        $response->assertRedirect(route('manage.users'));
+        $response->assertSessionHas('success', 'Successfully added');
+
+        $userDB = User::first();
+
+        $this->assertNotNull($userDB);
+        $this->assertEquals($userDB->title,$user->title);
+        $this->assertEquals($userDB->description,$user->description);
+        $this->assertEquals($userDB->url,$user->url);
+        $this->assertNull($user->published_at);
+    }
+
+    /**
+     * @test
+     */
     public function user_with_permissions_can_see_add_videos(){
         $this->loginAsVideoManager();
 
@@ -200,6 +250,11 @@ class VideosManageControllerTest extends TestCase
     private function loginAsVideoManager()
     {
         Auth::login(create_video_manager_user());
+    }
+
+    private function loginAsUserManager()
+    {
+        Auth::login(create_user_manager_user());
     }
 
     private function loginAsSuperAdmin()

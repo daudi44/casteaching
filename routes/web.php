@@ -28,13 +28,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-        Route::get('/manage/videos', [VideosManageController::class,'index'])->middleware(['can:videos_manage_index'])
-            ->name('manage.videos');
+        Route::get('/manage/videos', [VideosManageController::class,'index'])->middleware(['can:videos_manage_index'])->name('manage.videos');
 
         Route::post('/manage/videos', [VideosManageController::class, 'store'])->middleware(['can:videos_manage_store']);
 
         Route::delete('/manage/videos/{id}', [VideosManageController::class, 'destroy'])->middleware(['can:videos_manage_destroy']);
 
-        Route::get('/manage/users', [UsuarisManageController::class,'index'])->middleware(['can:users_manage_index'])
-        ->name('manage.users');
+        Route::get('/manage/users', [UsuarisManageController::class,'index'])->middleware(['can:users_manage_index'])->name('manage.users');
+
+        Route::post('/manage/users', [UsuarisManageController::class, 'store'])->middleware(['can:users_manage_create']);
+
+        Route::delete('/manage/users/{id}', [UsuarisManageController::class, 'destroy'])->middleware(['can:users_manage_destroy']);
 });
