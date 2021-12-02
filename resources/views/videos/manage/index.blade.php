@@ -2,7 +2,7 @@
 
     <div class="flex flex-col">
 
-        @if(session()->has('status'))
+        @if(session()->has('success') or session()->has('status'))
             <div class="rounded-md bg-green-100 p-4">
             <div class="flex">
                 <div class="flex-shrink-0">
@@ -13,7 +13,8 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm font-medium text-green-800">
-                        Successfully added
+                        {{session('success')}}
+                        {{session('status')}}
                     </p>
                 </div>
                 <div class="ml-auto pl-3">
@@ -100,9 +101,13 @@
                                 {{--                    <td>{{$video->description}}</td>--}}
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$video->url}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="/videos/{{$video->id}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Show</a>
+                                    <a href="/manage/videos/{{$video->id}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Show</a>
                                     <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                                    <form class="inline" method="POST" action="/manage/videos/{{$video->id}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="/videos/{{$video->id}}" class="text-indigo-600 hover:text-indigo-900" onclick="event.preventDefault(); this.closest('form').submit();">Delete</a>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

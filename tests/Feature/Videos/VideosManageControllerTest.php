@@ -21,6 +21,43 @@ class VideosManageControllerTest extends TestCase
     /**
      * @test
      */
+    public function user_with_permissions_can_destroy_videos(){
+        $this->loginAsVideoManager();
+
+        $video = Video::create([
+            'title' => '',
+            'description' => '',
+            'url' => ''
+        ]);
+
+        $response = $this->delete('/manage/videos/' . $video->id);
+
+        $response->assertRedirect(route('manage.videos'));
+        $this->assertNull(Video::find($video->id));
+        $this->assertNull($video->refresh);
+        $response->assertSessionHas('status', 'Successfully deleted');
+    }
+
+    /**
+     * @test
+     */
+    public function user_without_permissions_cannot_destroy_videos(){
+        $this->loginAsRegularUser();
+
+        $video = Video::create([
+            'title' => '',
+            'description' => '',
+            'url' => ''
+        ]);
+
+        $response = $this->delete('/manage/videos/' . $video->id);
+
+        $response->assertStatus(403);
+    }
+
+    /**
+     * @test
+     */
     public function user_with_permissions_can_store_videos(){
         $this->loginAsVideoManager();
 
@@ -46,6 +83,21 @@ class VideosManageControllerTest extends TestCase
         $this->assertEquals($videoDB->description,$video->description);
         $this->assertEquals($videoDB->url,$video->url);
         $this->assertNull($video->published_at);
+    }
+
+    /**
+     * @test
+     */
+    public function user_without_permissions_cannot_store_videos(){
+        $this->loginAsRegularUser();
+
+        $response = $this->post('/manage/videos',[
+            'title' => 'Prova',
+            'description' => 'bla bla',
+            'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+        ]);
+
+        $response->assertStatus(403);
     }
 
     /**
