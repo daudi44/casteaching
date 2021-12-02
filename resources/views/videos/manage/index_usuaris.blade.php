@@ -42,7 +42,7 @@
 
         <div class="overflow-x-auto">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <div class="shadow border-b border-gray-200 sm:rounded-lg">
                     <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 mt-6">
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
                             Usuaris - Dani
@@ -59,7 +59,11 @@
                         </thead>
                         <tbody>
                         @foreach($users as $user)
-                            <tr class="bg-white">
+                            @if($loop->odd)
+                                <tr class="bg-white">
+                            @else
+                                <tr class="bg-gray-200">
+                                    @endif
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$user->id}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$user->name}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$user->email}}</td>
