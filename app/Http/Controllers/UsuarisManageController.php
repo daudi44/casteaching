@@ -38,10 +38,19 @@ class UsuarisManageController extends Controller
 
     public function edit($id)
     {
+        return view('videos.manage.edit_usuaris', ['user'=>User::findOrFail($id)]);
     }
 
     public function update(Request $request, $id)
     {
+        $user =User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        session()->flash('status', 'Successfully changed');
+        return redirect()->route('manage.users');
     }
 
     public function destroy($id)
