@@ -4,6 +4,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Video;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
