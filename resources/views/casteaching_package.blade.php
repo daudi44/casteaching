@@ -10,7 +10,8 @@
 
         document.getElementById('getVideos').addEventListener('click', async function(){
             try{
-                const videos = await getVideos()
+                const videos = await window.casteaching.videos()
+                console.log(videos);
             }catch (error){
                 console.log('ERROR:');
                 console.log(error);

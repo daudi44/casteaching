@@ -1,0 +1,28 @@
+<?php
+
+namespace Tests\Traits;
+
+use Illuminate\Support\Facades\Auth;
+
+trait CanLogin
+{
+    private function loginAsVideoManager()
+    {
+        Auth::login(create_video_manager_user());
+    }
+
+    private function loginAsUserManager()
+    {
+        Auth::login(create_user_manager_user());
+    }
+
+    private function loginAsSuperAdmin()
+    {
+        Auth::login(create_superadmin_user());
+    }
+
+    private function loginAsRegularUser()
+    {
+        Auth::login(create_regular_user());
+    }
+}

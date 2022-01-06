@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
+use Tests\Traits\CanLogin;
 
 /**
  * @covers  \App\Http\Controllers\VideosManageController
  */
 class VideosManageControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
 
     /**
      * @test
@@ -298,25 +299,5 @@ class VideosManageControllerTest extends TestCase
         $response = $this->get('/manage/videos');
 
         $response -> assertRedirect(route('login'));
-    }
-
-    private function loginAsVideoManager()
-    {
-        Auth::login(create_video_manager_user());
-    }
-
-    private function loginAsUserManager()
-    {
-        Auth::login(create_user_manager_user());
-    }
-
-    private function loginAsSuperAdmin()
-    {
-        Auth::login(create_superadmin_user());
-    }
-
-    private function loginAsRegularUser()
-    {
-        Auth::login(create_regular_user());
     }
 }
