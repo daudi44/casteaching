@@ -1,7 +1,7 @@
 # Install
 
 ```bash
-npm install casteaching
+npm install @daudi/casteachingdani
 ```
 
 # Usage
@@ -16,10 +16,10 @@ casteaching.videos()
 casteaching.video.show(1)
 
 // Create Video
-casteaching.video.create({name: 'PHP 101', description: 'Bla bla bla',  url: 'https://youtube.com/...' })
+casteaching.video.create({name: 'One Video Testing', description: 'Hello There',  url: 'somewebvideopage.com' })
 
 // Update Video
-casteaching.video.update(1,{name: 'PHP 101', description: 'Bla bla bla',  url: 'https://youtube.com/...' })
+casteaching.video.update(1,{name: 'First Video Testing', description: 'Hello There Boys and Girls',  url: 'somewebvideopage.com' })
 
 // Destroy Video
 casteaching.video.destroy(1)

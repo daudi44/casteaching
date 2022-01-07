@@ -39,7 +39,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <video-show-link :video="video"></video-show-link>
                             <video-edit-link :video="video"></video-edit-link>
-                            <video-delete-link :video="video"></video-delete-link>
+                            <video-delete-link :video="video" @removed="refresh()" ></video-delete-link>
                         </td>
                     </tr>
                     <!--@endforeach-->
@@ -54,6 +54,7 @@
 import VideoShowLink from "./VideoShowLink";
 import VideoEditLink from "./VideoEditLink";
 import VideoDeleteLink from "./VideoDeleteLink";
+import bus from '../bus'
 
 export default {
     name: "VideosList",
@@ -69,6 +70,9 @@ export default {
     },
     async created() {
         this.getVideos()
+        bus.$on('created', ()=>{
+            this.refresh()
+        })
     },
     methods:{
         async getVideos(){
