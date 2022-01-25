@@ -1,5 +1,4 @@
 import Alpine from 'alpinejs';
-import casteachingdani from 'casteachingdani';
 import Vue from 'vue';
 import VideosList from "./components/VideosList";
 import VideoForm from "./components/VideoForm";
@@ -8,7 +7,7 @@ import VideoEstat from "./components/VideoEstat";
 require('./bootstrap');
 
 window.Alpine = Alpine;
-window.casteaching = casteachingdani;
+window.casteaching = casteaching;
 window.Vue = Vue;
 
 window.Vue.component('videos-list', VideosList)

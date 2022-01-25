@@ -5435,184 +5435,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./casteaching_package/index.js":
-/*!**************************************!*\
-  !*** ./casteaching_package/index.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-var apiClient = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
-  baseURL: 'http://casteaching.test/api',
-  withCredentials: true,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer tuPCKGl7ESwpCxDV5OikBEeQR9880KXvRGbmplWR'
-  }
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  videos: function () {
-    var _videos = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return apiClient.get('/videos/');
-
-            case 2:
-              response = _context.sent;
-              return _context.abrupt("return", response.data);
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    function videos() {
-      return _videos.apply(this, arguments);
-    }
-
-    return videos;
-  }(),
-  video: {
-    show: function () {
-      var _show = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(id) {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return apiClient.post('/videos/' + id);
-
-              case 2:
-                response = _context2.sent;
-                return _context2.abrupt("return", response.data);
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function show(_x) {
-        return _show.apply(this, arguments);
-      }
-
-      return show;
-    }(),
-    create: function () {
-      var _create = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(data) {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return apiClient.post('/videos/', data);
-
-              case 2:
-                response = _context3.sent;
-                return _context3.abrupt("return", response.data);
-
-              case 4:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }));
-
-      function create(_x2) {
-        return _create.apply(this, arguments);
-      }
-
-      return create;
-    }(),
-    update: function () {
-      var _update = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(id, data) {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return apiClient.put('/videos/' + id, data);
-
-              case 2:
-                response = _context4.sent;
-                return _context4.abrupt("return", response.data);
-
-              case 4:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }));
-
-      function update(_x3, _x4) {
-        return _update.apply(this, arguments);
-      }
-
-      return update;
-    }(),
-    destroy: function () {
-      var _destroy = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(id) {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.next = 2;
-                return apiClient["delete"]('/videos/' + id);
-
-              case 2:
-                response = _context5.sent;
-                return _context5.abrupt("return", response.data);
-
-              case 4:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5);
-      }));
-
-      function destroy(_x5) {
-        return _destroy.apply(this, arguments);
-      }
-
-      return destroy;
-    }()
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VideoDeleteLink.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VideoDeleteLink.vue?vue&type=script&lang=js& ***!
@@ -6090,12 +5912,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
-/* harmony import */ var casteachingdani__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! casteachingdani */ "./casteaching_package/index.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _components_VideosList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/VideosList */ "./resources/js/components/VideosList.vue");
-/* harmony import */ var _components_VideoForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/VideoForm */ "./resources/js/components/VideoForm.vue");
-/* harmony import */ var _components_VideoEstat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/VideoEstat */ "./resources/js/components/VideoEstat.vue");
-
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _components_VideosList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/VideosList */ "./resources/js/components/VideosList.vue");
+/* harmony import */ var _components_VideoForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/VideoForm */ "./resources/js/components/VideoForm.vue");
+/* harmony import */ var _components_VideoEstat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/VideoEstat */ "./resources/js/components/VideoEstat.vue");
 
 
 
@@ -6105,11 +5925,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
-window.casteaching = casteachingdani__WEBPACK_IMPORTED_MODULE_1__["default"];
-window.Vue = vue__WEBPACK_IMPORTED_MODULE_5__["default"];
-window.Vue.component('videos-list', _components_VideosList__WEBPACK_IMPORTED_MODULE_2__["default"]);
-window.Vue.component('video-form', _components_VideoForm__WEBPACK_IMPORTED_MODULE_3__["default"]);
-window.Vue.component('video-estat', _components_VideoEstat__WEBPACK_IMPORTED_MODULE_4__["default"]);
+window.casteaching = casteaching;
+window.Vue = vue__WEBPACK_IMPORTED_MODULE_4__["default"];
+window.Vue.component('videos-list', _components_VideosList__WEBPACK_IMPORTED_MODULE_1__["default"]);
+window.Vue.component('video-form', _components_VideoForm__WEBPACK_IMPORTED_MODULE_2__["default"]);
+window.Vue.component('video-estat', _components_VideoEstat__WEBPACK_IMPORTED_MODULE_3__["default"]);
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 var app = new window.Vue({
   el: '#app'

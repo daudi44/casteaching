@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Videos;
 
+use App\Events\VideoCreated;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 use Tests\Traits\CanLogin;
+use Illuminate\Support\Facades\Event;
 
 /**
  * @covers  \App\Http\Controllers\VideosManageController
@@ -115,17 +117,17 @@ class VideosManageControllerTest extends TestCase
     public function user_with_permissions_can_store_videos(){
         $this->loginAsVideoManager();
 
-        $video = objectify([
+        $video = objectify($videoArray = [
             'title' => 'Prova',
             'description' => 'bla bla',
             'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
         ]);
 
-        $response = $this->post('/manage/videos',[
-            'title' => 'Prova',
-            'description' => 'bla bla',
-            'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        ]);
+        Event::fake();
+
+        $response = $this->post('/manage/videos',$videoArray);
+
+        Event::assertDispatched(VideoCreated::class);
 
         $response->assertRedirect(route('manage.videos'));
         $response->assertSessionHas('success', 'Successfully added');
