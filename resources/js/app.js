@@ -3,6 +3,7 @@ import Vue from 'vue';
 import VideosList from "./components/VideosList";
 import VideoForm from "./components/VideoForm";
 import VideoEstat from "./components/VideoEstat";
+import casteaching from 'casteaching';
 
 require('./bootstrap');
 
