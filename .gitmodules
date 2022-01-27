@@ -1,3 +1,3 @@
-[submodule "casteaching_package_daudi"]
-	path = casteaching_package_daudi
-	url = git@github.com:daudi44/casteaching_package_daudi.git
+[submodule "casteaching"]
+	path = casteaching
+	url = git@github.com:acacha/casteaching_package.git
