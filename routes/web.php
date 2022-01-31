@@ -44,7 +44,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
         Route::get('/vue/manage/videos', [VideosManageVueController::class,'index'])->middleware(['can:videos_manage_index'])->name('manage.vue.videos');
-
         Route::post('/vue/manage/videos', [VideosManageVueController::class, 'store'])->middleware(['can:videos_manage_store']);
         Route::delete('/vue/manage/videos/{id}', [VideosManageVueController::class, 'destroy'])->middleware(['can:videos_manage_destroy']);
         Route::get('/vue/manage/videos/{id}', [VideosManageVueController::class, 'edit'])->middleware(['can:videos_manage_edit']);

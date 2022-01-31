@@ -6,11 +6,13 @@
         </div>
 
 
-        @can('videos_manage_create')
+        <div id="app">
+            @can('videos_manage_create')
                 <video-form></video-form>
-        @endcan
+            @endcan
 
-        <videos-list></videos-list>
+                <videos-list></videos-list>
+        </div>
 
     </div>
 </x-casteaching-layout>
