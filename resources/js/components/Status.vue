@@ -1,5 +1,5 @@
 <template>
-    <div v-if="amagat === false" class="rounded-md bg-green-50 p-4 mb-4">
+    <div v-if="show" class="rounded-md bg-green-50 p-4 mb-4">
         <div class="flex">
             <div class="flex-shrink-0">
                 <!-- Heroicon name: solid/check-circle -->
@@ -14,7 +14,7 @@
             </div>
             <div class="ml-auto pl-3">
                 <div class="-mx-1.5 -my-1.5">
-                    <button @click="amagat=true" type="button" class="inline-flex bg-green-50 rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">
+                    <button @click="show=false" type="button" class="inline-flex bg-green-50 rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">
                         <span class="sr-only">Dismiss</span>
                         <!-- Heroicon name: solid/x -->
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -31,18 +31,18 @@
 import bus from "../bus";
 
 export default {
-    name: "VideoEstat",
-    data(){
+    name: "Status",
+    data () {
         return {
-            amagat: true,
+            show: false,
             message: ''
         }
     },
     created() {
-        bus.$on('status', (message)=>{
-            this.message=message
-            this.amagat = false
-        })
+        bus.$on('status',(message) => {
+            this.message = message
+            this.show = true
+        });
     }
 }
 </script>

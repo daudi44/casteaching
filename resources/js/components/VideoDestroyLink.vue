@@ -1,13 +1,12 @@
 <template>
-        <a class="text-indigo-600 hover:text-indigo-900"
-        @click="destroy()">Delete</a>
+    <a class="text-indigo-600 hover:text-indigo-900 cursor-pointer"
+       @click="remove()">Delete</a>
 </template>
 
 <script>
-import bus from "../bus";
-
+import bus from '../bus'
 export default {
-    name: "VideoDeleteLink",
+    name: "VideoDestroyLink",
     props: {
         video: {
             type: Object,
@@ -15,14 +14,16 @@ export default {
         }
     },
     methods: {
-        async destroy(){
-            try{
+        async remove() {
+            try {
                 await window.casteaching.video.destroy(this.video.id)
                 this.$emit('removed')
-                bus.$emit('status', 'Successfully Deleted')
-            }catch (e) {
-                console.log(e);
+                bus.$emit('status','Video removed successfully')
+            } catch (error) {
+                console.log(error);
             }
+
+
         }
     }
 }
