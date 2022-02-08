@@ -32,10 +32,6 @@ class UsuarisManageController extends Controller
         return redirect()->route('manage.users');
     }
 
-    public function show($id)
-    {
-    }
-
     public function edit($id)
     {
         return view('videos.manage.edit_usuaris', ['user'=>User::findOrFail($id)]);
