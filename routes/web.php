@@ -22,8 +22,6 @@ Route::get('/', function () {
 });
 Route::get('/videos/{id}', [VideosController::class,'show']);
 
-
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
