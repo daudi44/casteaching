@@ -3,6 +3,7 @@
 use App\Http\Controllers\UsuarisManageController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VideosManageController;
+use App\Http\Controllers\VideosManageVueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,6 @@ Route::get('/', function () {
 });
 Route::get('/videos/{id}', [VideosController::class,'show']);
 
-
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -39,5 +38,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::delete('/manage/users/{id}', [UsuarisManageController::class, 'destroy'])->middleware(['can:users_manage_destroy']);
         Route::get('/manage/users/{id}', [UsuarisManageController::class, 'edit'])->middleware(['can:users_manage_edit']);
         Route::put('/manage/users/{id}', [UsuarisManageController::class, 'update'])->middleware(['can:users_manage_update']);
+
+
+
+        Route::get('/vue/manage/videos', [VideosManageVueController::class,'index'])->middleware(['can:videos_manage_index'])->name('manage.vue.videos');
+        Route::post('/vue/manage/videos', [VideosManageVueController::class, 'store'])->middleware(['can:videos_manage_store']);
+        Route::delete('/vue/manage/videos/{id}', [VideosManageVueController::class, 'destroy'])->middleware(['can:videos_manage_destroy']);
+        Route::get('/vue/manage/videos/{id}', [VideosManageVueController::class, 'edit'])->middleware(['can:videos_manage_edit']);
+        Route::put('/vue/manage/videos/{id}', [VideosManageVueController::class, 'update'])->middleware(['can:videos_manage_update']);
 
 });
