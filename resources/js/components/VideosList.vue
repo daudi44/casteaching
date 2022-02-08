@@ -39,7 +39,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <video-show-link :video="video"></video-show-link>
                             <video-edit-link :video="video"></video-edit-link>
-                            <video-delete-link :video="video" @removed="refresh()" ></video-delete-link>
+                            <video-destroy-link :video="video" @removed="refresh()" ></video-destroy-link>
                         </td>
                     </tr>
                     <!--@endforeach-->
@@ -53,15 +53,15 @@
 <script>
 import VideoShowLink from "./VideoShowLink";
 import VideoEditLink from "./VideoEditLink";
-import VideoDeleteLink from "./VideoDeleteLink";
 import bus from '../bus'
+import VideoDestroyLink from "./VideoDestroyLink";
 
 export default {
     name: "VideosList",
     components:{
         'video-show-link':VideoShowLink,
         'video-edit-link':VideoEditLink,
-        'video-delete-link':VideoDeleteLink
+        'video-destroy-link':VideoDestroyLink
     },
     data(){
         return {

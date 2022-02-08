@@ -1,18 +1,17 @@
 <x-casteaching-layout>
 
-    <div class="flex flex-col">
-        <div class="mx-auto w-full max-w-6xl bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-            <video-estat></video-estat>
-        </div>
+    <div class="flex flex-col" id="app">
+        <div class="flex flex-col mt-10">
 
+            <div class="mx-auto sm:px-6 lg:px-8 w-full max-w-7xl">
+                <status></status>
 
-        <div id="app">
-            @can('videos_manage_create')
-                <video-form></video-form>
-            @endcan
+                @can('videos_manage_create')
+                    <video-form></video-form>
+                @endcan
 
                 <videos-list></videos-list>
+            </div>
         </div>
-
     </div>
 </x-casteaching-layout>

@@ -1,20 +1,19 @@
-import Alpine from 'alpinejs';
-import Vue from 'vue';
 import VideosList from "./components/VideosList";
+import Alpine from 'alpinejs';
+import casteaching from '@acacha/casteaching'
+import Vue from 'vue'
 import VideoForm from "./components/VideoForm";
-import VideoEstat from "./components/VideoEstat";
-import casteaching from 'casteaching';
+import Status from "./components/Status";
 
 require('./bootstrap');
 
 window.Alpine = Alpine;
-Alpine.start();
-window.casteaching = casteaching;
+window.casteaching = casteaching({baseUrl:'/api'});
+window.Vue = Vue
 
 const vueApp = document.querySelector('#app')
 
-if(vueApp){
-    window.Vue = Vue
+if (vueApp){
     window.Vue.component('videos-list', VideosList )
     window.Vue.component('video-form', VideoForm )
     window.Vue.component('status', Status )
@@ -23,3 +22,7 @@ if(vueApp){
         el: '#app',
     });
 }
+
+Alpine.start();
+
+
