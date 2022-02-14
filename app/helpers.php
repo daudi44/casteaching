@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Serie;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Video;
@@ -244,6 +245,36 @@ if(! function_exists('create_sample_users')) {
         ]);
 
         return collect([$user1, $user2, $user3]);
+    }
+}
+
+if(! function_exists('create_sample_series')) {
+    function create_sample_series()
+    {
+        $firstSerie = Serie::create([
+            'title' => 'Estudio como filósofos',
+            'description' => 'Una serie de vídeos con música clásica para estudiar de la misma manera que como lo hacían los antiguos filosofos.',
+            'image' => 'umadelisia.jpg',
+            'teacher_name' => 'Pakistani Danny',
+            'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
+        ]);
+
+        $secondSerie = Serie::create([
+            'title' => 'Memes and shitpost',
+            'description' => 'Una serie repleta de memes recopilados de youtube con la que poder passar un buen rato con tus amigos.',
+            'image' => 'momardo.jpeg',
+            'teacher_name' => 'Pakistani Danny',
+            'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
+        ]);
+
+        $thirdSerie = Serie::create([
+            'title' => 'Mejores Videojuegos Indie',
+            'description' => 'En esta serie podremos encontrar variedad de vídeos que muestran y explican los que se consideran los mejores videojuegos indie de todos los tiempos.',
+            'image' => 'videogame.jpeg',
+            'teacher_name' => 'Pakistani Danny',
+            'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
+        ]);
+        return [$firstSerie, $secondSerie, $thirdSerie];
     }
 }
 
