@@ -22,9 +22,6 @@ class VideoApiTest extends TestCase
     {
         $this->loginAsRegularUser();
 
-
-
-
         $response = $this->putJson('/api/videos/'.$video->id);
 
         $response->assertStatus(403);

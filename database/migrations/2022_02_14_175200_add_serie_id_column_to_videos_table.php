@@ -25,8 +25,8 @@ class AddSerieIdColumnToVideosTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('superadmin');
+        Schema::table('videos', function (Blueprint $table) {
+            $table->dropColumn('serie_id');
         });
     }
 }
