@@ -3,16 +3,18 @@
 namespace Tests\Feature\Videos;
 
 use App\Events\VideoCreated;
+use App\Models\Serie;
 use App\Models\User;
 use App\Models\Video;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 use Tests\Traits\CanLogin;
-use Illuminate\Support\Facades\Event;
 
 /**
  * @covers  \App\Http\Controllers\VideosManageController
@@ -138,6 +140,46 @@ class VideosManageControllerTest extends TestCase
         $this->assertEquals($videoDB->title,$video->title);
         $this->assertEquals($videoDB->description,$video->description);
         $this->assertEquals($videoDB->url,$video->url);
+        $this->assertNull($video->published_at);
+    }
+
+    /**
+     * @test
+     */
+    public function user_with_permissions_can_store_videos_with_serie(){
+        $this->loginAsVideoManager();
+
+        $serie = Serie::create([
+            'title' => 'Estudio como filósofos',
+            'description' => 'Una serie de vídeos con música clásica para estudiar de la misma manera que como lo hacían los antiguos filosofos.',
+            'image' => 'umadelisia.jpg',
+            'teacher_name' => 'Pakistani Danny',
+            'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
+        ]);
+
+        $video = objectify($videoArray = [
+            'title' => 'Prova',
+            'description' => 'bla bla',
+            'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            'serie_id' => $serie->id
+        ]);
+
+        Event::fake();
+
+        $response = $this->post('/manage/videos',$videoArray);
+
+        Event::assertDispatched(VideoCreated::class);
+
+        $response->assertRedirect(route('manage.videos'));
+        $response->assertSessionHas('success', 'Successfully added');
+
+        $videoDB = Video::first();
+
+        $this->assertNotNull($videoDB);
+        $this->assertEquals($videoDB->title,$video->title);
+        $this->assertEquals($videoDB->description,$video->description);
+        $this->assertEquals($videoDB->url,$video->url);
+        $this->assertEquals($videoDB->serie_id,$serie->id);
         $this->assertNull($video->published_at);
     }
 
@@ -272,6 +314,42 @@ class VideosManageControllerTest extends TestCase
     /**
      * @test
      */
+    public function user_with_permissions_can_manage_videosand_see_serie()
+    {
+        $this->loginAsVideoManager();
+
+        $videos = create_sample_videos();
+
+        $serie = Serie::create([
+            'title' => 'Estudio como filósofos',
+            'description' => 'Una serie de vídeos con música clásica para estudiar de la misma manera que como lo hacían los antiguos filosofos.',
+            'image' => 'umadelisia.jpg',
+            'teacher_name' => 'Pakistani Danny',
+            'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
+        ]);
+
+        $videos[0]->setSerie($serie);
+
+        $response = $this->get('/manage/videos');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('videos.manage.index');
+        $response->assertViewHas('videos',function($v) use ($videos){
+            return $videos->count() === $videos->count() && get_class($videos) === Collection::class &&
+                get_class($videos[0]) === Video::class;
+        });
+
+        foreach ($videos as $video) {
+            $response->assertSee($video->id);
+            $response->assertSee($video->title);
+        }
+        $response->assertSee($videos[0]->fresh()->serie->title);
+    }
+
+
+    /**
+     * @test
+     */
     public function superadmins_can_manage_videos()
     {
         $this->loginAsSuperAdmin();
@@ -301,5 +379,47 @@ class VideosManageControllerTest extends TestCase
         $response = $this->get('/manage/videos');
 
         $response -> assertRedirect(route('login'));
+    }
+
+    /**
+     * @test
+     */
+    public function title_is_required(){
+        $this->loginAsVideoManager();
+
+        $response = $this->post('/manage/videos',[
+           'description' => 'dannyexample',
+           'url' => 'https://www.youtube.com/watch?v=7FG7nTUYowQ'
+        ]);
+
+        $response -> assertSessionHasErrors(['title']);
+    }
+
+    /**
+     * @test
+     */
+    public function description_is_required(){
+        $this->loginAsVideoManager();
+
+        $response = $this->post('/manage/videos',[
+            'title' => 'dannyexample',
+            'url' => 'https://www.youtube.com/watch?v=7FG7nTUYowQ'
+        ]);
+
+        $response -> assertSessionHasErrors(['description']);
+    }
+
+    /**
+     * @test
+     */
+    public function url_is_required(){
+        $this->loginAsVideoManager();
+
+        $response = $this->post('/manage/videos',[
+            'title' => 'dannyexample',
+            'description' => 'dannyexample',
+        ]);
+
+        $response -> assertSessionHasErrors(['url']);
     }
 }

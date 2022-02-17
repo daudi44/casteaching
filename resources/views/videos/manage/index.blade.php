@@ -38,6 +38,15 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5 pb-6">
+                                    <label class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Serie</label>
+                                    <select name="serie_id" id="serie" class="mt-1 sm:mt-0 sm:col-span-2 max-w-lg flex rounded-md shadow-sm max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md my-2">
+                                        @foreach(App\Models\Serie::all() as $serie)
+                                            <option value="{{$serie->id}}">{{$serie->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <button type="submit" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                     Add
                                 </button>
@@ -63,6 +72,7 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                             {{--                <th>Description</th>--}}
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">URL</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Serie</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -75,7 +85,8 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$video->id}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$video->title}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$video->url}}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{optional($video->serie)->title}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="/videos/{{$video->id}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Show</a>
                                     <a href="/manage/videos/{{$video->id}}" class="text-indigo-600 hover:text-indigo-900" >Edit</a>
                                     <form class="inline" method="POST" action="/manage/videos/{{$video->id}}">

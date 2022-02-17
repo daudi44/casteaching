@@ -22,6 +22,12 @@ class VideoApiTest extends TestCase
     {
         $this->loginAsRegularUser();
 
+        $video = Video::create([
+            'title' => 'asdf',
+            'description' => 'asdfasdf',
+            'url' => 'asdfasdf'
+        ]);
+
         $response = $this->putJson('/api/videos/'.$video->id);
 
         $response->assertStatus(403);
