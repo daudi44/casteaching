@@ -4,6 +4,7 @@ use App\Http\Controllers\UsuarisManageController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VideosManageController;
 use App\Http\Controllers\VideosManageVueController;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/manage/users/{id}', [UsuarisManageController::class, 'edit'])->middleware(['can:users_manage_edit']);
         Route::put('/manage/users/{id}', [UsuarisManageController::class, 'update'])->middleware(['can:users_manage_update']);
 
+        Route::get('/auth/redirect', function () {
+            return Socialite::driver('github')->redirect();
+        });
 
+        Route::get('/auth/callback', function () {
+            //dd(1);
+            $user = Socialite::driver('github')->user();
+            //dd($user->token);
+
+        });
 
         Route::get('/vue/manage/videos', [VideosManageVueController::class,'index'])->middleware(['can:videos_manage_index'])->name('manage.vue.videos');
         Route::post('/vue/manage/videos', [VideosManageVueController::class, 'store'])->middleware(['can:videos_manage_store']);

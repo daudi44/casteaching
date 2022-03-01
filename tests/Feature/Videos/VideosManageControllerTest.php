@@ -6,7 +6,6 @@ use App\Events\VideoCreated;
 use App\Models\Serie;
 use App\Models\User;
 use App\Models\Video;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -186,6 +185,45 @@ class VideosManageControllerTest extends TestCase
     /**
      * @test
      */
+    public function user_with_permissions_can_store_videos_with_user_id()
+    {
+        $this->loginAsVideoManager();
+
+        $user = User::create([
+            'name' => 'Daniel Audí Bielsa',
+            'email' => 'dani@casteaching.com',
+            'password' => Hash::make('12345678')
+        ]);
+
+        $video = objectify($videoArray = [
+            'title' => 'Prova',
+            'description' => 'bla bla',
+            'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            'user_id' => $user->id
+        ]);
+
+        Event::fake();
+        $response = $this->post('/manage/videos',$videoArray);
+
+        Event::assertDispatched(VideoCreated::class);
+
+        $response->assertRedirect(route('manage.videos'));
+//        $response->assertSessionHas('status', 'Successfully created');
+
+        $videoDB = Video::first();
+
+        $this->assertNotNull($videoDB);
+        $this->assertEquals($videoDB->title,$video->title);
+        $this->assertEquals($videoDB->description,$video->description);
+        $this->assertEquals($videoDB->url,$video->url);
+        $this->assertEquals($videoDB->user_id,$user->id);
+        $this->assertNull($video->published_at);
+
+    }
+
+    /**
+     * @test
+     */
     public function user_without_permissions_cannot_store_videos(){
         $this->loginAsRegularUser();
 
@@ -314,7 +352,7 @@ class VideosManageControllerTest extends TestCase
     /**
      * @test
      */
-    public function user_with_permissions_can_manage_videosand_see_serie()
+    public function user_with_permissions_can_manage_videos_and_see_serie()
     {
         $this->loginAsVideoManager();
 

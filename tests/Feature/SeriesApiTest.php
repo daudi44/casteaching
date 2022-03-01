@@ -63,4 +63,14 @@ class SeriesApiTest extends TestCase
                 ->etc()
         );
     }
+
+    /**
+     * @test
+     */
+    public function guest_users_cannot_show_unexisting_series()
+    {
+        $response = $this->get('/api/series/999');
+
+        $response->assertStatus(404);
+    }
 }

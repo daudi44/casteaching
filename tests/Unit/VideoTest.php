@@ -6,6 +6,7 @@ use App\Models\Serie;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 /**
@@ -90,5 +91,28 @@ class VideoTest extends TestCase
         $this->assertNotNull($video->fresh()->serie);
 
 //        $this->assertEquals($serie, $video->fresh->serie);
+    }
+
+    /**
+     * @test
+     */
+    public function video_can_have_owners()
+    {
+        $user = User::create([
+            'name' => 'Daniel Audí Bielsa',
+            'email' => 'dani@casteaching.com',
+            'password' => Hash::make('12345678')
+        ]);
+
+        $video = Video::create([
+            'title' => 'asdf',
+            'description' => 'asdfasdf',
+            'url' => 'asdfasdf'
+        ]);
+
+        $this->assertNull($video->owner);
+        $video->setOwner($user);
+        $this->assertNotNull($video->fresh()->user);
+        $this->assertEquals($video->user->id,$user->id);
     }
 }
