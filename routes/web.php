@@ -1,10 +1,18 @@
 <?php
 
+use App\Http\Controllers\GithubAuthController;
 use App\Http\Controllers\UsuarisManageController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VideosManageController;
 use App\Http\Controllers\VideosManageVueController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
+use GitHub\Sponsors\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\LandingPageController::class, 'show']);
 Route::get('/videos/{id}', [VideosController::class,'show']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -47,4 +53,25 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/vue/manage/videos/{id}', [VideosManageVueController::class, 'edit'])->middleware(['can:videos_manage_edit']);
         Route::put('/vue/manage/videos/{id}', [VideosManageVueController::class, 'update'])->middleware(['can:videos_manage_update']);
 
+    Route::get('/github_sponsors', function () {
+        $client = app(Client::class);
+        dump($sponsors = $client->login('acacha')->sponsors());
+        foreach ($sponsors as $sponsor) {
+            dump($sponsor['avatarUrl']); // The sponsor's GitHub avatar url...
+            dump($sponsor['name']); // The sponsor's GitHub name...
+        }
+
+        dump($sponsors = $client->login('driesvints')->sponsors());
+        foreach ($sponsors as $sponsor) {
+            dump($sponsor);
+        }
+
+        dd($client->login('acacha')->isSponsoredBy('acacha'));
+    });
 });
+
+
+
+Route::get('/auth/redirect', [GithubAuthController::class,'redirect']);
+
+Route::get('/auth/callback', [GithubAuthController::class,'callback']);

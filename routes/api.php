@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SeriesApiController;
 use App\Http\Controllers\VideosApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/videos', [VideosApiController::class, 'index']);
 Route::get('/videos/{id}', [VideosApiController::class, 'show']);
+
+Route::get('/series', [SeriesApiController::class, 'index']);
+Route::get('/series/{id}', [SeriesApiController::class, 'show']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 

@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Events\VideoCreated;
+use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use Tests\Feature\Videos\VideosManageControllerTest;
 
 class
 VideosManageController extends Controller
 {
     public static function testedBy()
     {
-        return VideosManageController::class;
+        return VideosManageControllerTest::class;
     }
 
     //CRUD
@@ -30,10 +34,19 @@ VideosManageController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $request->validate([
+            'title'=>'required',
+            'description'=>'required',
+            'url'=>'required'
+        ]);
+
         $video = Video::create([
             'title' => $request->title,
             'description' => $request->description,
-            'url' => $request->url
+            'url' => $request->url,
+            'serie_id' => $request->serie_id
         ]);
 
         session()->flash('success', 'Successfully added');

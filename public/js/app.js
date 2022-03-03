@@ -14,12 +14,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/@acacha/casteaching/node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__(options) {
     let apiClient = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-        baseURL: (options && options.baseUrl) || process.env.MIX_API_URL,
+        baseURL: (options && options.baseUrl) || "http://casteaching.test/api",
         withCredentials: true,
         headers: {
             Accept: 'application/json',
@@ -8058,13 +8057,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
-window.casteaching = (0,_acacha_casteaching__WEBPACK_IMPORTED_MODULE_2__["default"])({
-  baseUrl: '/api'
-});
-window.Vue = vue__WEBPACK_IMPORTED_MODULE_5__["default"];
+alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
+window.casteaching = (0,_acacha_casteaching__WEBPACK_IMPORTED_MODULE_2__["default"])();
 var vueApp = document.querySelector('#app');
 
 if (vueApp) {
+  window.Vue = vue__WEBPACK_IMPORTED_MODULE_5__["default"];
   window.Vue.component('videos-list', _components_VideosList__WEBPACK_IMPORTED_MODULE_0__["default"]);
   window.Vue.component('video-form', _components_VideoForm__WEBPACK_IMPORTED_MODULE_3__["default"]);
   window.Vue.component('status', _components_Status__WEBPACK_IMPORTED_MODULE_4__["default"]);
@@ -8072,8 +8070,6 @@ if (vueApp) {
     el: '#app'
   });
 }
-
-alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
 
 /***/ }),
 

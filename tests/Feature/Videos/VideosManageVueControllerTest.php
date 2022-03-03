@@ -19,14 +19,18 @@ class VideosManageVueControllerTest extends TestCase
     {
         $this->loginAsVideoManager();
 
+        $videos = create_sample_videos();
+
         $response = $this->get('/vue/manage/videos');
 
         $response->assertStatus(200);
         $response->assertViewIs('videos.manage.vue.index');
 
+        $response->assertViewMissing('videos');
+
         foreach ($videos as $video) {
             $response->assertSee($video->id);
-            $response->assertSee($video->title);
+//            $response->assertSee($video->title);
         }
     }
 

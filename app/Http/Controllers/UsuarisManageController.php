@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Tests\Feature\Videos\UsuarisManageControllerTest;
 
 class UsuarisManageController extends Controller
 {
     public static function testedBy()
     {
-        return UsuarisManageController::class;
+        return UsuarisManageControllerTest::class;
     }
     public function index()
     {

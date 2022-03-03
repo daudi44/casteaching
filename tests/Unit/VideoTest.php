@@ -2,11 +2,17 @@
 
 namespace Tests\Unit;
 
+use App\Models\Serie;
+use App\Models\User;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
+/**
+ * @covers Video::class
+ */
 class VideoTest extends TestCase
 {
     use RefreshDatabase;
@@ -24,7 +30,7 @@ class VideoTest extends TestCase
             'published_at' => Carbon::parse('December 13, 2020 8:00pm'),
             'previous' => null,
             'next' => null,
-            'series_id' => 1
+            'serie_id' => 1
         ]);
 
         //2-Execució
@@ -47,7 +53,7 @@ class VideoTest extends TestCase
             'published_at' => null,
             'previous' => null,
             'next' => null,
-            'series_id' => 1
+            'serie_id' => 1
         ]);
 
         //2-Execució
@@ -55,5 +61,59 @@ class VideoTest extends TestCase
 
         //3-Comprovació
         $this->assertEquals($dateToTest, '');
+    }
+
+    /**
+     * @test
+     */
+    public function video_have_serie()
+    {
+        //Preparació
+        $video = Video::create([
+            'title' => 'asdf',
+            'description' => 'asdfasdf',
+            'url' => 'asdfasdf'
+        ]);
+
+        //Comprovació
+        $this->assertNull($video->serie);
+
+        $serie = Serie::create([
+            'title' => 'Estudio como filósofos',
+            'description' => 'Una serie de vídeos con música clásica para estudiar de la misma manera que como lo hacían los antiguos filosofos.',
+            'image' => 'umadelisia.jpg',
+            'teacher_name' => 'Pakistani Danny',
+            'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com'),
+            'created_at' =>Carbon::now()->addSeconds(1)
+        ]);
+
+        $video->setSerie($serie);
+
+        $this->assertNotNull($video->fresh()->serie);
+
+//        $this->assertEquals($serie, $video->fresh->serie);
+    }
+
+    /**
+     * @test
+     */
+    public function video_can_have_owners()
+    {
+        $user = User::create([
+            'name' => 'Daniel Audí Bielsa',
+            'email' => 'dani@casteaching.com',
+            'password' => Hash::make('12345678')
+        ]);
+
+        $video = Video::create([
+            'title' => 'asdf',
+            'description' => 'asdfasdf',
+            'url' => 'asdfasdf'
+        ]);
+
+        $this->assertNull($video->owner);
+        $video->setOwner($user);
+        $this->assertNotNull($video->fresh()->user);
+        $this->assertEquals($video->user->id,$user->id);
     }
 }
