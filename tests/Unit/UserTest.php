@@ -39,16 +39,16 @@ class UserTest extends TestCase
     public function user_can_have_owned_videos()
     {
         $user = User::create([
-            'name' => 'Pepe Pardo Jeans',
-            'email' => 'pepepardo@casteaching.com',
-            'password' => Hash::make('12345678')
+            'name' => 'Daniel Audí Bielsa',
+            'email' => 'dani@casteaching.com',
+            'password' => Hash::make('12345')
         ]);
 
         $this->assertCount(0,$user->videos);
         $video  = Video::create([
-            'title' => 'TDD 101',
-            'description' => 'Bla bla bla',
-            'url' => 'https://youtu.be/ednlsVl-NHA'
+            'title' => 'example',
+            'description' => 'stuff',
+            'url' => 'https://www.youtube.com/watch?v=I2srfp8TSrc'
         ]);
         $user->addVideo($video);
         $this->assertCount(1,$user->refresh()->videos);
