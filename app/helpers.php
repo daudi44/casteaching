@@ -13,9 +13,9 @@ use Spatie\Permission\Models\Permission;
 if(! function_exists('create_default_user')){
     function create_default_user(){
         $user = User::create([
-            'name' => config('casteaching.default_user.name', 'Sergi Tur Badenas'),
-            'email' => config('casteaching.default_user.email','sergiturbadenas@gmail.com'),
-            'password' => Hash::make(config('casteaching.default_user.password','12345678'))
+            'name' => 'Sergi Tur Badenas',
+            'email' => 'sergiturbadenas@gmail.com',
+            'password' => Hash::make('12345678')
         ]);
 
         add_personal_team($user);
