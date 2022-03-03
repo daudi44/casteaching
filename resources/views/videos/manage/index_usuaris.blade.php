@@ -2,7 +2,7 @@
 
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex flex-col">
-        <x-estat></x-estat>
+        <x-status></x-status>
             @can('users_manage_create')
                 <div class="mx-auto w-full max-w-6xl bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
                     <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">

@@ -456,7 +456,7 @@ button,
  * as it triggers the better focus styles even for links, which still use a dotted
  * outline in Firefox by default.
  */
-
+ 
 :-moz-focusring {
 	outline: auto;
 }
@@ -523,14 +523,14 @@ samp {
  *    CSS Remedy, with `svg` added as well.
  *
  *    https://github.com/mozdevs/cssremedy/issues/14
- *
+ * 
  * 2. Add `vertical-align: middle` to align replaced elements more
  *    sensibly by default when overriding `display` by adding a
  *    utility like `inline`.
  *
  *    This can trigger a poorly considered linting error in some
  *    tools but is included by design.
- *
+ * 
  *    https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210
  */
 
@@ -1331,6 +1331,9 @@ select {
 .col-span-6 {
 	grid-column: span 6 / span 6;
 }
+.col-span-3 {
+	grid-column: span 3 / span 3;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -1354,6 +1357,10 @@ select {
 .-my-1 {
 	margin-top: -0.25rem;
 	margin-bottom: -0.25rem;
+}
+.-my-2 {
+	margin-top: -0.5rem;
+	margin-bottom: -0.5rem;
 }
 .ml-3 {
 	margin-left: 0.75rem;
@@ -1441,6 +1448,9 @@ select {
 }
 .mt-12 {
 	margin-top: 3rem;
+}
+.mb-1 {
+	margin-bottom: 0.25rem;
 }
 .-mt-px {
 	margin-top: -1px;
@@ -1627,6 +1637,9 @@ select {
 }
 .grid-cols-1 {
 	grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-3 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .flex-col {
 	flex-direction: column;
@@ -1943,9 +1956,6 @@ select {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 }
-.pr-10 {
-    padding-right: 2.5rem;
-}
 .py-12 {
 	padding-top: 3rem;
 	padding-bottom: 3rem;
@@ -1995,6 +2005,9 @@ select {
 }
 .pb-20 {
 	padding-bottom: 5rem;
+}
+.pr-10 {
+	padding-right: 2.5rem;
 }
 .pb-5 {
 	padding-bottom: 1.25rem;
@@ -2495,6 +2508,11 @@ select {
 		margin-bottom: -1px;
 	}
 
+	.sm\:-mx-6 {
+		margin-left: -1.5rem;
+		margin-right: -1.5rem;
+	}
+
 	.sm\:ml-3 {
 		margin-left: 0.75rem;
 	}
@@ -2634,6 +2652,10 @@ select {
 
 	.sm\:gap-4 {
 		gap: 1rem;
+	}
+
+	.sm\:overflow-hidden {
+		overflow: hidden;
 	}
 
 	.sm\:rounded-lg {
@@ -3130,6 +3152,10 @@ select {
 		margin-top: 0px;
 	}
 
+	.md\:mb-2 {
+		margin-bottom: 0.5rem;
+	}
+
 	.md\:grid {
 		display: grid;
 	}
@@ -3154,8 +3180,22 @@ select {
 		border-left-width: 1px;
 	}
 
+	.md\:bg-transparent {
+		background-color: transparent;
+	}
+
+	.md\:bg-white {
+		--tw-bg-opacity: 1;
+		background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+	}
+
 	.md\:p-3 {
 		padding: 0.75rem;
+	}
+
+	.md\:px-4 {
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 }
 @media (min-width: 1024px) {
@@ -3400,6 +3440,15 @@ select {
 
 	.lg\:col-span-4 {
 		grid-column: span 4 / span 4;
+	}
+
+	.lg\:-mx-8 {
+		margin-left: -2rem;
+		margin-right: -2rem;
+	}
+
+	.lg\:mb-4 {
+		margin-bottom: 1rem;
 	}
 
 	.lg\:max-w-none {
