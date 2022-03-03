@@ -18,6 +18,9 @@ if(! function_exists('create_default_user')){
             'password' => Hash::make('12345678')
         ]);
 
+        $user -> superadmin = true;
+        $user -> save();
+
         add_personal_team($user);
     }
 }
