@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Videos;
+namespace Tests\Feature\Series;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;

@@ -281,6 +281,34 @@ if(! function_exists('create_sample_series')) {
     }
 }
 
+if (! function_exists('create_series_manager_user')) {
+    function create_series_manager_user() {
+        $user = User::create([
+            'name' => 'DaniSeriesManager',
+            'email' => 'daniseriesmanager@casteaching.com',
+            'password' => Hash::make('12345')
+        ]);
+
+        Permission::create(['name' => 'series_manage_index']);
+        Permission::create(['name' => 'series_manage_show']);
+        Permission::create(['name' => 'series_manage_create']);
+        Permission::create(['name' => 'series_manage_store']);
+        Permission::create(['name' => 'series_manage_edit']);
+        Permission::create(['name' => 'series_manage_update']);
+        Permission::create(['name' => 'series_manage_destroy']);
+        $user->givePermissionTo('series_manage_index');
+        $user->givePermissionTo('series_manage_show');
+        $user->givePermissionTo('series_manage_create');
+        $user->givePermissionTo('series_manage_store');
+        $user->givePermissionTo('series_manage_destroy');
+        $user->givePermissionTo('series_manage_edit');
+        $user->givePermissionTo('series_manage_update');
+
+        add_personal_team($user);
+        return $user;
+    }
+}
+
 class DomainObject implements ArrayAccess, JsonSerializable
 {
     private $data = [];
