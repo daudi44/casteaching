@@ -50,8 +50,8 @@
                         <x-jet-label for="image" value="{{ __('Miniatura') }}"/>
                         <div x-data="{imageName: null, imagePreview: null}" class="col-span-6 sm:col-span-4">
 
-                            <input 
-                                type="file" 
+                            <input
+                                type="file"
                                 class="hidden"
                                 name="image"
                                 x-ref="image"
@@ -65,7 +65,7 @@
                             " >
 
                             <div class="mt-2" x-show="! imagePreview">
-                                <img class="h-48 w-full object-cover" src="{{$serie->image_url}}" alt="">
+                                <img class="h-48 w-full object-cover" src="/storage/{{$serie->image}}" alt="">
                             </div>
 
 

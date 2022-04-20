@@ -254,26 +254,32 @@ if(! function_exists('create_sample_users')) {
 if(! function_exists('create_sample_series')) {
     function create_sample_series()
     {
+        $path = \Illuminate\Support\Facades\Storage::disk('public')->putFile('series', new \Illuminate\Http\File('series_photos/umadelisia.jpg'));
+
         $firstSerie = Serie::create([
             'title' => 'Estudio como filósofos',
             'description' => 'Una serie de vídeos con música clásica para estudiar de la misma manera que como lo hacían los antiguos filosofos.',
-            'image' => 'umadelisia.jpg',
+            'image' => $path,
             'teacher_name' => 'Pakistani Danny',
             'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
         ]);
+
+        $path = \Illuminate\Support\Facades\Storage::disk('public')->putFile('series', new \Illuminate\Http\File('series_photos/momardo.jpeg'));
 
         $secondSerie = Serie::create([
             'title' => 'Memes and shitpost',
             'description' => 'Una serie repleta de memes recopilados de youtube con la que poder passar un buen rato con tus amigos.',
-            'image' => 'momardo.jpeg',
+            'image' => $path,
             'teacher_name' => 'Pakistani Danny',
             'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
         ]);
 
+        $path = \Illuminate\Support\Facades\Storage::disk('public')->putFile('series', new \Illuminate\Http\File('series_photos/videogame.jpeg'));
+
         $thirdSerie = Serie::create([
             'title' => 'Mejores Videojuegos Indie',
             'description' => 'En esta serie podremos encontrar variedad de vídeos que muestran y explican los que se consideran los mejores videojuegos indie de todos los tiempos.',
-            'image' => 'videogame.jpeg',
+            'image' => $path,
             'teacher_name' => 'Pakistani Danny',
             'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
         ]);

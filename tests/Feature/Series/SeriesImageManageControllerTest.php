@@ -21,21 +21,21 @@ class SeriesImageManageControllerTest extends TestCase
      * @test
      */
     public function series_managers_can_update_image_series()
-    {        
+    {
         $this->loginAsSeriesManager();
 
         $serie = Serie::create([
-            'title' => 'TDD 101',
-            'description' => 'Aprèn tot sobre TDD',
-            'image' => 'anterior.png',
-            'teacher_name' => 'Sergi Tur'
+            'title' => 'test',
+            'description' => 'test',
+            'image' => 'test.png',
+            'teacher_name' => 'Dani Audí'
         ]);
 
         Storage::fake('public');
 
         // URI ENDPOINT -> API -> FUNCTION
         $response = $this->put('/manage/series/' . $serie->id . '/image/',[
-            'image' => $file = UploadedFile::fake()->image('serie.jpg'),
+            'image' => $file = UploadedFile::fake()->image('test.png'),
         ]);
 
         $response->assertRedirect();

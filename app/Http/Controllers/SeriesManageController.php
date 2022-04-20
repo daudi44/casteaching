@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Serie;
 use Illuminate\Http\Request;
-use Tests\Feature\Videos\SeriesManageControllerTest;
+use Tests\Feature\Series\SeriesManageControllerTest;
 
 class SeriesManageController extends Controller
 {
@@ -14,7 +14,7 @@ class SeriesManageController extends Controller
     }
     public function index()
     {
-        return view('videos.manage.index_series',[
+        return view('series.manage.index_series',[
             'series' => Serie::all()
         ]);
     }
@@ -36,7 +36,7 @@ class SeriesManageController extends Controller
 
     public function edit($id)
     {
-        return view('videos.manage.edit_series', ['serie'=>Serie::findOrFail($id)]);
+        return view('series.manage.edit_series', ['serie'=>Serie::findOrFail($id)]);
     }
 
     public function update(Request $request, $id)
