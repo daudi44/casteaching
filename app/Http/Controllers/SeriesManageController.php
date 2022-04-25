@@ -21,12 +21,16 @@ class SeriesManageController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
         Serie::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => 'umadelisia.jpg',
-            'teacher_name' => 'Pakistani Danny',
-            'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com'),
+            'image' => $request->image,
+            'teacher_name' => $request->teacher_name,
         ]);
 
         session()->flash('success', 'Successfully added');

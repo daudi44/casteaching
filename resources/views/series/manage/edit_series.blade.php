@@ -64,9 +64,11 @@
                                 reader.readAsDataURL($refs.image.files[0]);
                             " >
 
-                            <div class="mt-2" x-show="! imagePreview">
-                                <img class="h-48 w-full object-cover" src="/storage/{{$serie->image}}" alt="">
-                            </div>
+                            @if ($serie->image )
+                                <div class="mt-2" x-show="! imagePreview">
+                                    <img class="h-48 w-full object-cover" src="/storage/{{$serie->image}}" alt="">
+                                </div>
+                            @endif
 
 
                             <div class="mt-2" x-show="imagePreview">

@@ -283,7 +283,14 @@ if(! function_exists('create_sample_series')) {
             'teacher_name' => 'Pakistani Danny',
             'teacher_photo_url' => 'https://gravatar.com/avatar/' . md5('daudi@iesebre.com')
         ]);
-        return [$firstSerie, $secondSerie, $thirdSerie];
+
+        sleep(1);
+
+        $fourthSerieWithoutImage = Serie::create([
+            'title' => 'Sample Serie',
+            'description' => 'Default serie without main image'
+        ]);
+        return [$firstSerie, $secondSerie, $thirdSerie, $fourthSerieWithoutImage];
     }
 }
 
@@ -312,6 +319,13 @@ if (! function_exists('create_series_manager_user')) {
 
         add_personal_team($user);
         return $user;
+    }
+}
+
+if (! function_exists('create_placeholder_series_image')) {
+    function create_placeholder_series_image()
+    {
+        return \Illuminate\Support\Facades\Storage::disk('public')->putFileAs('series', new \Illuminate\Http\File(base_path('/series_photos/placeholder.png')),'placeholder.png');
     }
 }
 

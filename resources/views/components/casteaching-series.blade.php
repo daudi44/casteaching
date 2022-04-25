@@ -12,7 +12,7 @@
                 @foreach($series as $serie)
                     <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
                         <div class="flex-shrink-0">
-                            <img class="h-48 w-full object-cover" src="/storage/{{ $serie->image }}" alt="">
+                            <img class="h-48 w-full object-cover" src="/storage/{{ $serie->image_url }}" alt="">
                         </div>
                         <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                             <div class="flex-1">
@@ -27,8 +27,8 @@
                             <div class="mt-6 flex items-center">
                                 <div class="flex-shrink-0">
                                     <a href="#">
-                                        <span class="sr-only">{{ $serie->teacher_name }}</span>
-                                        <img class="h-10 w-10 rounded-full" src="{{ $serie->teacher_photo_url }}" alt="">
+                                        <span class="sr-only">{{ $serie->teacher_name ?? 'Anònim' }}</span>
+                                        <img class="h-10 w-10 rounded-full" src="{{ $serie->teacher_photo_url ??  'https://avatars.dicebear.com/api/identicon/:seed.svg'}}" alt="">
                                     </a>
                                 </div>
                                 <div class="ml-3">
