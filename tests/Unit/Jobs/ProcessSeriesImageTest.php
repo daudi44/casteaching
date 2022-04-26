@@ -6,7 +6,7 @@ use App\Jobs\ProcessSeriesImage;
 use App\Models\Serie;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 /*
  * @covers ProcessSeriesImage::class
@@ -22,7 +22,9 @@ class ProcessSeriesImageTest extends TestCase
     {
         Storage::fake('public');
 
-        Storage::disk('public')->put('series/test.jpg', file_get_contents(base_path('tests/Fixtures/11111111.jpg')));
+        Storage::disk('public')->put('series/test.jpg', file_get_contents($path = base_path('tests/Fixtures/11111111.jpg')));
+
+        $originalSize = filesize($path);
 
         $serie = Serie::create([
             'title' => 'test events',
@@ -34,8 +36,13 @@ class ProcessSeriesImageTest extends TestCase
 
         $resizedImage = Storage::disk('public')->get('series/test.jpg');
 
-        list($width) = getimagesizefromstring($resizedImage);
+        list($width, $height) = getimagesizefromstring($resizedImage);
 
-        $this->assertEquals(400,$width);
+        $this->assertEquals(400,$height);
+        $this->assertEquals(711,$width);
+
+        $newSize = Storage::disk('public')->size('series/test.jpg');
+
+        $this->assertLessThan($originalSize, $newSize);
     }
 }
