@@ -14,6 +14,7 @@ use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Tests\Unit\UserTest;
+use Laravel\Paddle\Billable;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,7 @@ class User extends Authenticatable
     use HasRoles;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Billable;
 
     public static function testedBy()
     {

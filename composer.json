@@ -13,6 +13,7 @@
         "github-php/sponsors": "^0.3.2",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
+        "laravel/cashier-paddle": "^1.5",
         "laravel/framework": "^9.1.5",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
