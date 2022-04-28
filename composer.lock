@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "199b8ace9abb637be9d9e2ce71daba4c",
+    "content-hash": "8545b480f00ff689f4fd9e26e55a7558",
     "packages": [
         {
             "name": "alaouy/youtube",
@@ -1832,6 +1832,76 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
+        },
+        {
+            "name": "kanuu-io/kanuu-laravel",
+            "version": "dev-patch-1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/acacha/kanuu-laravel.git",
+                "reference": "9455f916a9e0426f046fbcb334ba2f95a7ce4c8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/acacha/kanuu-laravel/zipball/9455f916a9e0426f046fbcb334ba2f95a7ce4c8d",
+                "reference": "9455f916a9e0426f046fbcb334ba2f95a7ce4c8d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
+                "illuminate/contracts": "^7.0|^8.0|^9.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kanuu\\Laravel\\KanuuServiceProvider"
+                    ],
+                    "aliases": {
+                        "Kanuu": "Kanuu\\Laravel\\Facades\\Kanuu"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kanuu\\Laravel\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Kanuu\\Laravel\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Integrate Kanuu to your Laravel application",
+            "homepage": "https://github.com/kanuu-io/kanuu-laravel",
+            "keywords": [
+                "kanuu",
+                "laravel",
+                "paddle",
+                "subscription"
+            ],
+            "support": {
+                "source": "https://github.com/acacha/kanuu-laravel/tree/patch-1"
+            },
+            "time": "2022-02-15T14:45:05+00:00"
         },
         {
             "name": "laravel/cashier-paddle",
@@ -10039,7 +10109,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "kanuu-io/kanuu-laravel": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
