@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Tests\Feature\Videos\UsuarisManageControllerTest;
+use Tests\Feature\Users\UsuarisManageControllerTest;
 
 class UsuarisManageController extends Controller
 {
@@ -15,7 +15,7 @@ class UsuarisManageController extends Controller
     }
     public function index()
     {
-        return view('videos.manage.index_usuaris',[
+        return view('users.manage.index_usuaris',[
             'users' => User::all()
         ]);
     }
@@ -35,7 +35,7 @@ class UsuarisManageController extends Controller
 
     public function edit($id)
     {
-        return view('videos.manage.edit_usuaris', ['user'=>User::findOrFail($id)]);
+        return view('users.manage.edit_usuaris', ['user'=>User::findOrFail($id)]);
     }
 
     public function update(Request $request, $id)

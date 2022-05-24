@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Videos;
+namespace Tests\Feature\Users;
 
 use App\Models\User;
 use App\Models\Video;
@@ -58,7 +58,7 @@ class UsuarisManageControllerTest extends TestCase
         $response = $this->get('/manage/users/' . $user->id);
 
         $response->assertStatus(200);
-        $response->assertViewIs('videos.manage.edit_usuaris');
+        $response->assertViewIs('users.manage.edit_usuaris');
         $response->assertViewHas('user', function ($v) use ($user){
             return $user->is($v);
         });
@@ -81,7 +81,7 @@ class UsuarisManageControllerTest extends TestCase
         $response = $this->get('/manage/users');
 
         $response->assertStatus(200);
-        $response->assertViewIs('videos.manage.index_usuaris');
+        $response->assertViewIs('users.manage.index_usuaris');
         $response->assertViewHas('users',function($v) use ($users){
             return $users->count() === $users->count() && get_class($users) === Collection::class &&
                 get_class($users[0]) === User::class;
@@ -104,7 +104,7 @@ class UsuarisManageControllerTest extends TestCase
         $response = $this->get('/manage/users');
 
         $response->assertStatus(200);
-        $response->assertViewIs('videos.manage.index_usuaris');
+        $response->assertViewIs('users.manage.index_usuaris');
     }
 
     /**

@@ -17,9 +17,9 @@ class CreateSeriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->dateTime('published_at')->nullable();
-            $table->string('teacher_name');
+            $table->string('teacher_name')->nullable();
             $table->string('teacher_photo_url')->nullable();
             $table->timestamps();
         });

@@ -1,18 +1,15 @@
 <?php
 
 use App\Http\Controllers\GithubAuthController;
+use App\Http\Controllers\SeriesImageManageController;
+use App\Http\Controllers\SeriesManageController;
 use App\Http\Controllers\UsuarisManageController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VideosManageController;
 use App\Http\Controllers\VideosManageVueController;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Facades\Route;
 use GitHub\Sponsors\Client;
+use Illuminate\Support\Facades\Route;
+use Kanuu\Laravel\Facades\Kanuu;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +26,12 @@ Route::get('/', [\App\Http\Controllers\LandingPageController::class, 'show']);
 Route::get('/videos/{id}', [VideosController::class,'show']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+
+    Route::get('/subscribe', function () {
+        return redirect(route('kanuu.redirect', \Illuminate\Support\Facades\Auth::user()));
+    })->name('subscribe');
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -45,7 +48,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/manage/users/{id}', [UsuarisManageController::class, 'edit'])->middleware(['can:users_manage_edit']);
         Route::put('/manage/users/{id}', [UsuarisManageController::class, 'update'])->middleware(['can:users_manage_update']);
 
+        Route::get('/manage/series', [SeriesManageController::class,'index'])->middleware(['can:series_manage_index'])->name('manage.series');
+        Route::post('/manage/series', [SeriesManageController::class, 'store'])->middleware(['can:series_manage_create']);
+        Route::delete('/manage/series/{id}', [SeriesManageController::class, 'destroy'])->middleware(['can:series_manage_destroy']);
+        Route::get('/manage/series/{id}', [SeriesManageController::class, 'edit'])->middleware(['can:series_manage_edit']);
+        Route::put('/manage/series/{id}', [SeriesManageController::class, 'update'])->middleware(['can:series_manage_update']);
 
+        Route::put('/manage/series/{id}/image', [SeriesImageManageController::class, 'update'])->middleware(['can:series_manage_update']);
 
         Route::get('/vue/manage/videos', [VideosManageVueController::class,'index'])->middleware(['can:videos_manage_index'])->name('manage.vue.videos');
         Route::post('/vue/manage/videos', [VideosManageVueController::class, 'store'])->middleware(['can:videos_manage_store']);
@@ -63,3 +72,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::get('/auth/redirect', [GithubAuthController::class,'redirect']);
 
 Route::get('/auth/callback', [GithubAuthController::class,'callback']);
+
+Kanuu::redirectRoute()
+    ->middleware('auth')
+    ->name('kanuu.redirect');
