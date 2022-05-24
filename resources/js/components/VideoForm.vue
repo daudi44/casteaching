@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="grid grid-cols-3 gap-6">
                         <div class="col-span-3">
                                 <label for="serie" class="block text-sm font-medium text-gray-700">
@@ -41,7 +41,7 @@
                             <select id="serie" name="serie_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="">-- Escolliu una serie --</option>
                                 @foreach (App\Models\Serie::all() as $serie)
-                                    <option value="{{ $serie->id }}"> {{ $serie->title }}</option>
+                                    <option :id="$serie"> :title="$serie"</option>
                                 @endforeach
                             </select>
                         </div>
@@ -55,7 +55,7 @@
                             <select id="user" name="user_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="">-- Escolliu un usuari --</option>
                                 @foreach (App\Models\User::all() as $user)
-                                    <option value="{{ $user->id }}"> {{ $user->name }}</option>
+                                    <option :id="$user"> :name="$user"</option>
                                 @endforeach
                             </select>
                         </div>
