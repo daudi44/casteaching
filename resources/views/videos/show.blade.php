@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="flex-1">
-                @if($video->only_for_subscribers)
+                @if($video->canBeDisplayed())
                     @include('videos.show_main')
                 @else
                     @include('videos.show_main_needs_subscription')
